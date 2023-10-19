@@ -1,4 +1,5 @@
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,12 +23,15 @@ public class LoginController {
 
     private User currentUser; // Add a field to store the current user
 
+    @FXML
+    private Button loginButton;
+
+
     public void handleLoginAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (DatabaseManager.authenticateUser(username, password)) {
-            statusLabel.setText("Login successful!");
             statusLabel.setText("Login successful!");
             currentUser = DatabaseManager.getUser(username); // Fetch the user from the database
             openDashboardWindow(currentUser);
@@ -36,7 +40,7 @@ public class LoginController {
             statusLabel.setText("Invalid username or password.");
         }
     }
-    
+
     private void openDashboardWindow(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashboardView.fxml"));
@@ -56,5 +60,4 @@ public class LoginController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
     }
-    
 }

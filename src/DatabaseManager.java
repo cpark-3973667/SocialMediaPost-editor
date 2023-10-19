@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseManager {
     private static final String DB_URL = "jdbc:sqlite:database/myData.db";
@@ -267,7 +269,7 @@ public class DatabaseManager {
     }
     
     // Delete a post by post ID
-    public void removePost(int postId) {
+    public static void removePost(int postId) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -291,4 +293,44 @@ public class DatabaseManager {
             }
         }
     }
+    
+    // Retrieve the top N posts with the most likes,for a given user or over ALL users, in a descending order of likes
+    public static List<SocialMediaPost> retrieveTopNPosts(String author, int n) {
+        List<SocialMediaPost> topPosts = new ArrayList<>();
+
+        String query;
+        if (author.equals("ALL")) {
+            query = "SELECT * FROM social_media_posts ORDER BY likes DESC LIMIT ?";
+        } else {
+            query = "SELECT * FROM social_media_posts WHERE author = ? ORDER BY likes DESC LIMIT ?";
+        }
+
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            if (!author.equals("ALL")) {
+                statement.setString(1, author);
+                statement.setInt(2, n);
+            } else {
+                statement.setInt(1, n);
+            }
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("ID");
+                    String content = resultSet.getString("content");
+                    String retrievedAuthor = resultSet.getString("author");
+                    int likes = resultSet.getInt("likes");
+                    int shares = resultSet.getInt("shares");
+                    LocalDateTime dateTime = LocalDateTime.parse(resultSet.getString("date_time"),
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                    topPosts.add(new SocialMediaPost(id, content, retrievedAuthor, likes, shares, dateTime));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topPosts;
+    }
+
+
 }

@@ -5,12 +5,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="center" spacing="20" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditProfileController">
-    <Label fx:id="statusLabel" text="" />
-    <TextField fx:id="usernameField" promptText="Username" />
-    <TextField fx:id="passwordField" promptText="Password" />
-    <TextField fx:id="firstNameField" promptText="First Name" />
-    <TextField fx:id="lastNameField" promptText="Last Name" />
-    <Button text="Save Changes" onAction="#handleSaveChanges" />
+<VBox alignment="center" spacing="20" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
+     fx:controller="EditProfileController" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label fx:id="statusLabel" text="" />
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Username" />
+            <TextField fx:id="usernameField" promptText="Username" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Password" />
+            <TextField fx:id="passwordField" promptText="Password" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="First Name" />
+            <TextField fx:id="firstNameField" promptText="First Name" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Last Name" />
+            <TextField fx:id="lastNameField" promptText="Last Name" />
+        </VBox>
+        <Button text="Save Changes" onAction="#handleSaveChanges" />
+    </children>
 </VBox>

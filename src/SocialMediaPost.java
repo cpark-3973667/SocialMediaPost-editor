@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class SocialMediaPost {
     private int id;
@@ -7,6 +8,12 @@ public class SocialMediaPost {
     private int likes;
     private int shares;
     private LocalDateTime dateTime;
+    
+    public String toCSVString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return String.format("%d,%s,%s,%d,%d,%s",
+                id, content, author, likes, shares, dateTime.format(formatter));
+    }
 
     public SocialMediaPost(int id, String content, String author, int likes, int shares, LocalDateTime dateTime) {
         this.id = id;

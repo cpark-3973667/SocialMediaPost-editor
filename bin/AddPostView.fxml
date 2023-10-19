@@ -5,18 +5,38 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="center" spacing="20" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddPostController">
-    <Label text="Add Post">
-        <VBox.margin>
-            <javafx.geometry.Insets top="20.0" />
-        </VBox.margin>
-    </Label>
-    <TextField fx:id="idField" promptText="ID" />
-    <TextField fx:id="contentField" promptText="Content" />
-    <TextField fx:id="authorField" promptText="Author" />
-    <TextField fx:id="likesField" promptText="Likes" />
-    <TextField fx:id="sharesField" promptText="Shares" />
-    <TextField fx:id="dateTimeField" promptText="Date-Time (DD/MM/YYYY HH:MM)" />
-    <Button text="Add Post" onAction="#handleAddPost" />
+<VBox alignment="center" spacing="20" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
+     fx:controller="AddPostController" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label text="Add Post">
+            <VBox.margin>
+                <javafx.geometry.Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Post ID" />
+            <TextField fx:id="idField" promptText="ID" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Post Content" />
+            <TextField fx:id="contentField" promptText="Content" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Author" />
+            <TextField fx:id="authorField" promptText="Author" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Number of likes" />
+            <TextField fx:id="likesField" promptText="Likes" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Number of shares" />
+            <TextField fx:id="sharesField" promptText="Shares" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Date &amp; Time" />
+            <TextField fx:id="dateTimeField" promptText="Date-Time (DD/MM/YYYY HH:MM)" />
+        </VBox>
+        <Button text="Add Post" onAction="#handleAddPost" />
+    </children>
 </VBox>

@@ -13,7 +13,7 @@ public class MainMenu extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenuView.fxml"));
             primaryStage.setTitle("Main Menu");
-            primaryStage.setScene(new Scene(root, 300, 250));
+            primaryStage.setScene(new Scene(root, 600, 400));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,9 +1,11 @@
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -12,6 +14,9 @@ public class DashboardController {
 	
     @FXML
     private Label welcomeLabel;
+    
+    @FXML
+    private Button logoutButton;
     
     public void initData(User user) {
         this.currentUser = user;
@@ -78,14 +83,46 @@ public class DashboardController {
 
 
     public void openRetrieveTopNPostsWindow() {
-        // Add logic to open the Retrieve Top N Posts window
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RetrieveTopNPostsView.fxml"));
+            Parent retrieveTopNPostsRoot = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Retrieve Top N Posts");
+            stage.setScene(new Scene(retrieveTopNPostsRoot));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void openExportToCSVWindow() {
-        // Add logic to open the Export Post to CSV window
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExportManagerView.fxml"));
+            Parent exportRoot = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Export Post to CSV");
+            stage.setScene(new Scene(exportRoot));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void handleLogout() {
-        // Add logic to handle the logout action
+    @FXML
+    private void handleLogout() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+            Parent mainMenuRoot = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Main Menu");
+            stage.setScene(new Scene(mainMenuRoot));
+            stage.show();
+
+            // Close the current dashboard window
+            Stage currentStage = (Stage) logoutButton.getScene().getWindow();
+            currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
