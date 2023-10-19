@@ -41,6 +41,7 @@ public class LoginController {
         }
     }
 
+
     private void openDashboardWindow(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashboardView.fxml"));
@@ -55,9 +56,27 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
+    
     private void closeLoginWindow() {
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
+    }
+    
+    @FXML
+    public void goBackToMainMenu() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+            Parent root = fxmlLoader.load();      
+            Stage stage = new Stage();
+            MainMenuController controller = fxmlLoader.getController();
+            controller.setMainMenuStage(stage); // Pass the stage to the controller
+            stage.setTitle("Main Menu");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+
+            closeLoginWindow(); // Close the current window
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

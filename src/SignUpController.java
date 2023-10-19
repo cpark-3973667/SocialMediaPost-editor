@@ -69,4 +69,22 @@ public class SignUpController {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void goBackToMainMenu() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+            Parent root = fxmlLoader.load();      
+            Stage stage = new Stage();
+            MainMenuController controller = fxmlLoader.getController();
+            controller.setMainMenuStage(stage); // Pass the stage to the controller
+            stage.setTitle("Main Menu");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+
+            closeSignUpWindow(); // Close the current window
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,16 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
-   <children>
-      <Label fx:id="welcomeLabel" layoutX="243.0" layoutY="34.0" text="Welcome, User!" />
-      <Button fx:id="logoutButton" layoutX="527.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
-      <Button layoutX="34.0" layoutY="95.0" mnemonicParsing="false" onAction="#openEditProfileWindow" text="Edit Profile" />
-      <Button layoutX="34.0" layoutY="134.0" mnemonicParsing="false" onAction="#openAddPostWindow" text="Add Post" />
-      <Button layoutX="34.0" layoutY="173.0" mnemonicParsing="false" onAction="#openRetrievePostWindow" text="Retrieve Post" />
-      <Button layoutX="34.0" layoutY="212.0" mnemonicParsing="false" onAction="#openRemovePostWindow" text="Remove Post" />
-      <Button layoutX="34.0" layoutY="251.0" mnemonicParsing="false" onAction="#openRetrieveTopNPostsWindow" text="Retrieve Top N Posts" />
-      <Button layoutX="34.0" layoutY="290.0" mnemonicParsing="false" onAction="#openExportToCSVWindow" text="Export Post to CSV" />
-   </children>
+    <children>
+        <Label fx:id="welcomeLabel" layoutX="243.0" layoutY="34.0" text="Welcome, User!" style="-fx-font-size: 20px;"/>
+        <Button fx:id="logoutButton" layoutX="527.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+        <Button fx:id="upgradeVIPButton" layoutX="483.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUpgradeVIP" text="Upgrade to VIP" />
+        <Button layoutX="34.0" layoutY="95.0" mnemonicParsing="false" onAction="#openEditProfileWindow" text="Edit Profile" />
+        <Button layoutX="34.0" layoutY="134.0" mnemonicParsing="false" onAction="#openAddPostWindow" text="Add Post" />
+        <Button layoutX="34.0" layoutY="173.0" mnemonicParsing="false" onAction="#openRetrievePostWindow" text="Retrieve Post" />
+        <Button layoutX="34.0" layoutY="212.0" mnemonicParsing="false" onAction="#openRemovePostWindow" text="Remove Post" />
+        <Button layoutX="34.0" layoutY="251.0" mnemonicParsing="false" onAction="#openRetrieveTopNPostsWindow" text="Retrieve Top N Posts" />
+        <Button layoutX="34.0" layoutY="290.0" mnemonicParsing="false" onAction="#openExportToCSVWindow" text="Export Post to CSV" />
+
+        <VBox layoutX="400.0" layoutY="95.0" spacing="10">
+            <Label text="VIP functions" />
+            <Button fx:id="dataVisualizationButton" onAction="#openDataVisualization" text="Data Visualization" />
+            <Button fx:id="bulkImportButton" onAction="#openBulkImportWindow" text="Bulk Import Social Media Posts" />
+        </VBox>
+    </children>
 </AnchorPane>

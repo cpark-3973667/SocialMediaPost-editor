@@ -11,7 +11,10 @@ public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MainMenuView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+            Parent root = fxmlLoader.load();
+            MainMenuController controller = fxmlLoader.getController();
+            controller.setMainMenuStage(primaryStage); // Pass the stage to the controller
             primaryStage.setTitle("Main Menu");
             primaryStage.setScene(new Scene(root, 600, 400));
             primaryStage.show();
@@ -19,6 +22,7 @@ public class MainMenu extends Application {
             e.printStackTrace();
         }
     }
+
 
     public static void main(String[] args) {
         launch(args);

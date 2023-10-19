@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -215,7 +216,6 @@ public class DatabaseManager {
             LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
             System.out.println("Parsed LocalDateTime: " + parsedDateTime);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date-time format. Please provide the date-time in the format (DD/MM/YYYY HH:MM).");
             return false;
         }
         return true;
@@ -331,6 +331,66 @@ public class DatabaseManager {
         }
         return topPosts;
     }
+    
+    // Check VIP status of user
+    public static boolean checkVipStatus(String username) {
+        String query = "SELECT vip_status FROM users WHERE username = ?";
+        boolean isVip = false;
 
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            if (resultSet.next()) {
+                isVip = resultSet.getBoolean("vip_status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isVip;
+    }
+    
+    // Upgrade user to VIP
+    public static void upgradeUserToVIP(String username) {
+        try (Connection connection = DriverManager.getConnection(DB_URL)) {
+            String sql = "UPDATE users SET vip_status = ? WHERE username = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setBoolean(1, true); // Assuming the vip_status column is of type BOOLEAN
+            pstmt.setString(2, username);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Get the counts of different share ranges for populating the pie chart
+    public static List<Integer> getShareCounts() {
+        List<Integer> shareCounts = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement statement1 = connection.prepareStatement("SELECT COUNT(*) FROM social_media_posts WHERE shares < 100");
+             PreparedStatement statement2 = connection.prepareStatement("SELECT COUNT(*) FROM social_media_posts WHERE shares >= 100 AND shares < 1000");
+             PreparedStatement statement3 = connection.prepareStatement("SELECT COUNT(*) FROM social_media_posts WHERE shares >= 1000")) {
+            try (ResultSet resultSet1 = statement1.executeQuery()) {
+                if (resultSet1.next()) {
+                    shareCounts.add(resultSet1.getInt(1));
+                }
+            }
+            try (ResultSet resultSet2 = statement2.executeQuery()) {
+                if (resultSet2.next()) {
+                    shareCounts.add(resultSet2.getInt(1));
+                }
+            }
+            try (ResultSet resultSet3 = statement3.executeQuery()) {
+                if (resultSet3.next()) {
+                    shareCounts.add(resultSet3.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return shareCounts;
+    }
 }

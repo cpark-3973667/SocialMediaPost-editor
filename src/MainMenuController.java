@@ -7,12 +7,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainMenuController {
-
+	private Stage mainMenuStage;
+	
     @FXML
     private Button signUpButton;
 
     @FXML
     private Button loginButton;
+    
+    public void setMainMenuStage(Stage stage) {
+        this.mainMenuStage = stage;
+    }
 
     public void openSignUpWindow() {
         try {
@@ -22,6 +27,8 @@ public class MainMenuController {
             stage.setTitle("Sign Up");
             stage.setScene(new Scene(signUpRoot));
             stage.show();
+            
+            mainMenuStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,6 +42,8 @@ public class MainMenuController {
             stage.setTitle("Log In");
             stage.setScene(new Scene(loginRoot));
             stage.show();
+            
+            mainMenuStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
