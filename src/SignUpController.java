@@ -46,6 +46,7 @@ public class SignUpController {
                 statusLabel.setText("User created successfully!");
                 closeSignUpWindow();
                 openSignUpSuccessfulWindow();
+                goBackToMainMenu();
             }
         }
     }
