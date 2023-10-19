@@ -38,7 +38,7 @@ public class SignUpController {
         } else {
         	DatabaseManager dbManager = new DatabaseManager();
         	// Check if the username already exists
-            if (dbManager.usernameExists(username)) {
+            if (DatabaseManager.usernameExists(username)) {
                 statusLabel.setText("Username already exists. Please choose a different username.");
             } else {
                 // If the username does not exist, create the user and insert it into the database table

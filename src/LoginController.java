@@ -20,6 +20,8 @@ public class LoginController {
     @FXML
     private Label statusLabel;
 
+    private User currentUser; // Add a field to store the current user
+
     public void handleLoginAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -27,19 +29,20 @@ public class LoginController {
         if (DatabaseManager.authenticateUser(username, password)) {
             statusLabel.setText("Login successful!");
             statusLabel.setText("Login successful!");
-            openDashboardWindow(username);
+            currentUser = DatabaseManager.getUser(username); // Fetch the user from the database
+            openDashboardWindow(currentUser);
             closeLoginWindow();
         } else {
             statusLabel.setText("Invalid username or password.");
         }
     }
     
-    private void openDashboardWindow(String username) {
+    private void openDashboardWindow(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DashboardView.fxml"));
             Parent dashboardRoot = fxmlLoader.load();
             DashboardController dashboardController = fxmlLoader.getController();
-            dashboardController.initialize(username);
+            dashboardController.initData(user);
             Stage stage = new Stage();
             stage.setTitle("Dashboard");
             stage.setScene(new Scene(dashboardRoot));
