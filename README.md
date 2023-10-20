@@ -1,5 +1,7 @@
 # AssignmentTwo
  Advanced Programming s3973667
+ LINK TO GITHUB:
+https://github.com/cpark-3973667/s3973667-advanced-programming-assignment-two/tree/main
 
  IDE USED:
  Eclipse IDE
